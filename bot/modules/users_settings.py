@@ -1,3 +1,4 @@
+import asyncio
 from datetime import datetime
 from pyrogram.handlers import MessageHandler, CallbackQueryHandler
 from pyrogram.filters import command, regex, create
@@ -9,6 +10,7 @@ from time import time
 from functools import partial
 from html import escape
 from io import BytesIO
+from Script import script
 from asyncio import sleep
 
 from bot import OWNER_ID, bot, user_data, config_dict, DATABASE_URL, IS_PREMIUM_USER, MAX_SPLIT_SIZE
@@ -22,15 +24,15 @@ from bot.helper.ext_utils.text_utils import uset_display_dict
 from bot.helper.ext_utils.bot_utils import update_user_ldata, get_readable_file_size, sync_to_async, new_thread, is_gdrive_link
 
 handler_dict = {}
-fname_dict = {'rcc': 'RClone',
-              'prefix': 'Prefix',
-              'suffix': 'Suffix',
-              'remname': 'Remname',
-              'ldump': 'Dump',
-              'user_tds': 'User Custom TDs',
-              'lcaption': 'Caption',
-              'thumb': 'Thumbnail',
-              'yt_opt': 'YT-DLP Options'}
+fname_dict = {'rcc': 'ʀᴄʟᴏɴᴇ',
+              'prefix': 'ᴘʀᴇғɪx',
+              'suffix': 'sᴜғғɪx',
+              'remname': 'ʀᴇᴍɴᴀᴍᴇ',
+              'ldump': 'ᴅᴜᴍᴘ',
+              'user_tds': 'ᴜsᴇʀ ᴄᴜsᴛᴏᴍ ᴛᴅs',
+              'lcaption': 'ᴄᴀᴘᴛɪᴏɴ',
+              'thumb': 'ᴛʜᴜᴍʙɴᴀɪʟ',
+              'yt_opt': 'ʏᴛ-ᴅʟᴘ ᴏᴘᴛɪᴏɴs'}
 
 async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None):
     user_id = from_user.id
@@ -41,57 +43,57 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
     user_dict = user_data.get(user_id, {})
     if key is None:
         buttons.ibutton("🔗 𝗟𝗘𝗘𝗖𝗛 𝗦𝗘𝗧𝗧𝗜𝗡𝗚 🔗", f"userset {user_id} leech")
-        if user_dict and any(key in user_dict for key in ['prefix', 'suffix', 'remname', 'ldump', 'thumb', 'as_doc']):
-            buttons.ibutton("Reset Setting", f"userset {user_id} reset_all")
-        buttons.ibutton("Close", f"userset {user_id} close")
-        text = f'<b>User Settings for {name}</b>'
+        buttons.ibutton("⤬ 𝗖𝗟𝗢𝗦𝗘 ⤬", f"userset {user_id} close")
+        text = script.USER_SETTINGS_TEXT.format(name, f'@{from_user.username}', user_id, from_user.language_code, from_user.dc_id)
         button = buttons.build_menu(1)
     elif key == 'leech':
         if user_dict.get('as_doc', False) or 'as_doc' not in user_dict and config_dict['AS_DOCUMENT']:
-            ltype = "DOCUMENT"
-            buttons.ibutton("Send As Media", f"userset {user_id} doc")
+            ltype = "ᴅᴏᴄᴜᴍᴇɴᴛ"
+            buttons.ibutton("sᴇᴛ ᴍᴇᴅɪᴀ", f"userset {user_id} doc")
         else:
-            ltype = "MEDIA"
-            buttons.ibutton("Send As Document", f"userset {user_id} doc")
+            ltype = "ᴍᴇᴅɪᴀ"
+            buttons.ibutton("sᴇᴛ ᴅᴏᴄᴜᴍᴇɴᴛ", f"userset {user_id} doc")
+        buttons.ibutton("ᴛʜᴜᴍʙɴᴀɪʟ", f"userset {user_id} thumb")
+        thumbmsg = "ᴇxɪsᴛs" if await aiopath.exists(thumbpath) else "ɴᴏᴛ ᴇxɪsᴛs"
+      
+        buttons.ibutton("sᴇᴛ ᴘʀᴇғɪx", f"userset {user_id} prefix")
+        prefix = user_dict.get('prefix', 'ɴᴏᴛ ᴇxɪsᴛs')
+        buttons.ibutton("sᴇᴛ sᴜғғɪx", f"userset {user_id} suffix")
+        suffix = user_dict.get('suffix', 'ɴᴏᴛ ᴇxɪsᴛs')
 
-        buttons.ibutton("Thumbnail", f"userset {user_id} thumb")
-        thumbmsg = "Exists" if await aiopath.exists(thumbpath) else "Not Exists"
+        
+        buttons.ibutton("ʟᴇᴇᴄʜ ᴄᴀᴘᴛɪᴏɴ", f"userset {user_id} lcaption")
+        lcaption = user_dict.get('lcaption', 'ɴᴏᴛ ᴇxɪsᴛs')
+        buttons.ibutton("ʟᴇᴇᴄʜ ᴅᴜᴍᴘ", f"userset {user_id} ldump")
+        ldump = 'ɴᴏᴛ ᴇxɪsᴛs' if (val:=user_dict.get('ldump', '')) == '' else val
+        
 
-        buttons.ibutton("Prefix", f"userset {user_id} prefix")
-        prefix = user_dict.get('prefix', 'Not Exists')
-
-        buttons.ibutton("Suffix", f"userset {user_id} suffix")
-        suffix = user_dict.get('suffix', 'Not Exists')
-
-        buttons.ibutton("Leech Caption", f"userset {user_id} lcaption")
-        lcaption = user_dict.get('lcaption', 'Not Exists')
-
-        buttons.ibutton("Leech Dump", f"userset {user_id} ldump")
-        ldump = 'Not Exists' if (val:=user_dict.get('ldump', '')) == '' else val
-
-        mediainfo = "Enabled" if user_dict.get('mediainfo', config_dict['SHOW_MEDIAINFO']) else "Disabled"
-        buttons.ibutton('Disable MediaInfo' if mediainfo == 'Enabled' else 'Enable MediaInfo', f"userset {user_id} mediainfo")
+        mediainfo = "ᴇɴᴀʙʟᴇᴅ" if user_dict.get('mediainfo', config_dict['SHOW_MEDIAINFO']) else "ᴅɪsᴀʙʟᴇᴅ"
+        buttons.ibutton('ᴅɪsᴀʙʟᴇᴅ ᴍᴇᴅɪᴀɪɴғᴏ' if mediainfo == 'Enabled' else 'ᴇɴᴀʙʟᴇᴅ ᴍᴇᴅɪᴀɪɴғᴏ', f"userset {user_id} mediainfo")
         if config_dict['SHOW_MEDIAINFO']:
             mediainfo = "Force Enabled"
 
-        buttons.ibutton("Remname", f"userset {user_id} remname")
-        remname = user_dict.get('remname', 'Not Exists')
+        remname = user_dict.get('remname', 'ɴᴏᴛ ᴇxɪsᴛs')
+        buttons.ibutton("ʟᴇᴄᴄʜ sᴘʟɪᴛs", f"userset {user_id} split_size")
 
         SPLIT_SIZE = '4GB' if IS_PREMIUM_USER else '2GB'
-        text = f'<b>Leech Settings for {name}</b>\n\n'
-        text += f'<b>• Leech Type:</b> {ltype}\n'
-        text += f'<b>• Custom Thumbnail:</b> {thumbmsg}\n'
-        text += f'<b>• Prefix:</b> <code>{prefix}</code>\n'
-        text += f'<b>• Suffix:</b> <code>{suffix}</code>\n'
-        text += f'<b>• Remname:</b> <code>{remname}</code>\n'
-        text += f'<b>• Leech split size:</b> {SPLIT_SIZE}\n'
-        text += f'<b>• Leech Caption:</b> <code>{escape(lcaption)}</code>\n'
-        text += f'<b>• Leech Dump:</b> <code>{ldump}</code>\n'
-        text += f'<b>• MediaInfo Mode:</b> <code>{mediainfo}</code>'
 
-        buttons.ibutton("Back", f"userset {user_id} back", "footer")
-        buttons.ibutton("Close", f"userset {user_id} close", "footer")
+        text = f'<b><u>ʟᴇᴇᴄʜ sᴇᴛᴛɪɴɢs ғᴏʀ : {name}</u></b>\n\n'
+        text += f'<b>┌  ʟᴇᴇᴄʜ ᴛʏᴘᴇ :</b> <code>{ltype}</code>\n'
+        text += f'<b>├  ᴄᴜsᴛᴏᴍ ᴛʜᴜᴍʙɴᴀɪʟ :</b> <code>{thumbmsg}</code>\n'
+        text += f'<b>├  ʟᴇᴇᴄʜ ᴘʀᴇғɪx :</b> <code>{prefix}</code>\n'
+        text += f'<b>├  ʟᴇᴇᴄʜ sᴜғғɪx :</b> <code>{suffix}</code>\n'
+        text += f'<b>├  ʟᴇᴇᴄʜ ᴄᴀᴘᴛɪᴏɴ :</b> <code>{escape(lcaption)}</code>\n'
+        text += f'<b>├  ʟᴇᴇᴄʜ ᴅᴜᴍᴘ :</b> <code>{ldump}</code>\n'
+        text += f'<b>├  ʟᴇᴇᴄʜ sᴘʟɪᴛ sɪᴢᴇ : </b> <code>{SPLIT_SIZE}</code>\n'
+        text += f'<b>├  ᴍᴇᴅɪᴀ ɪɴғᴏ ᴍᴏᴅᴇ :</b> <code>{mediainfo}</code>\n'
+        text += f'<b>└  ʀᴇᴍɴᴀᴍᴇ : <code>{remname}</code>\n\n~ ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ - <a href="https://t.me/Hari_OP">ʜᴀʀɪ ᠰ ᴛɢ​</a></b>'
+        if user_dict and any(key in user_dict for key in ['prefix', 'suffix', 'remname', 'ldump', 'thumb', 'as_doc']):
+            buttons.ibutton("ʀᴇsᴇᴛ ᴀʟʟ sᴇᴛᴛɪɴɢs", f"userset {user_id} reset_all")
+        buttons.ibutton("⥢ ʙᴀᴄᴋ", f"userset {user_id} back", "footer")
+        buttons.ibutton("ᴄʟᴏsᴇ ↻", f"userset {user_id} close", "footer")
         button = buttons.build_menu(2)
+      
     elif edit_type:
         text = f"<b><u>{fname_dict[key]} Settings :</u></b>\n\n"
         if key == 'rcc':
@@ -134,8 +136,8 @@ async def update_user_settings(query, key=None, edit_type=None, edit_mode=None, 
     user_id = query.from_user.id
     thumbnail = f"Thumbnails/{user_id}.jpg"
     if not ospath.exists(thumbnail):
-        thumbnail = 'https://graph.org/file/73ae908d18c6b38038071.jpg'
-    await editMessage(query.message, msg, button, thumbnail)
+        thumbnail = 'https://graph.org/file/4a23820398e62ec753cc0.jpg'
+    await editMessage(query.message, msg, button, photo=thumbnail)
 
 
 @new_thread
@@ -144,10 +146,12 @@ async def user_settings(client, message):
     user_id = message.from_user.id
     thumbnail = f"Thumbnails/{user_id}.jpg"
     if not ospath.exists(thumbnail):
-        thumbnail = 'https://graph.org/file/73ae908d18c6b38038071.jpg'
+        thumbnail = 'https://graph.org/file/4a23820398e62ec753cc0.jpg'
+    myrr = await message.reply_sticker("CAACAgIAAxkBAAEMymtlUOMCEYuaeaRXYN8vW1J8bnm2NAACrQ0AAqyZIEjdinfy_Yf5cB4E")
+    await asyncio.sleep(2)
+    await myrr.delete()
     x = await sendMessage(message, msg, button, thumbnail)
     await five_minute_del(message)
-    await deleteMessage(x)
 
 
 async def set_yt_options(client, message, pre_event):
