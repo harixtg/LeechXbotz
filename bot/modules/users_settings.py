@@ -54,30 +54,22 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
             ltype = "ᴍᴇᴅɪᴀ"
             buttons.ibutton("sᴇᴛ ᴅᴏᴄᴜᴍᴇɴᴛ", f"userset {user_id} doc")
         buttons.ibutton("ᴛʜᴜᴍʙɴᴀɪʟ", f"userset {user_id} thumb")
-        thumbmsg = "ᴇxɪsᴛs" if await aiopath.exists(thumbpath) else "ɴᴏᴛ ᴇxɪsᴛs"
-      
+        thumbmsg = "ᴇxɪsᴛs" if await aiopath.exists(thumbpath) else "ɴᴏᴛ ᴇxɪsᴛs"      
         buttons.ibutton("sᴇᴛ ᴘʀᴇғɪx", f"userset {user_id} prefix")
         prefix = user_dict.get('prefix', 'ɴᴏᴛ ᴇxɪsᴛs')
         buttons.ibutton("sᴇᴛ sᴜғғɪx", f"userset {user_id} suffix")
-        suffix = user_dict.get('suffix', 'ɴᴏᴛ ᴇxɪsᴛs')
-
-        
+        suffix = user_dict.get('suffix', 'ɴᴏᴛ ᴇxɪsᴛs')        
         buttons.ibutton("ʟᴇᴇᴄʜ ᴄᴀᴘᴛɪᴏɴ", f"userset {user_id} lcaption")
         lcaption = user_dict.get('lcaption', 'ɴᴏᴛ ᴇxɪsᴛs')
         buttons.ibutton("ʟᴇᴇᴄʜ ᴅᴜᴍᴘ", f"userset {user_id} ldump")
         ldump = 'ɴᴏᴛ ᴇxɪsᴛs' if (val:=user_dict.get('ldump', '')) == '' else val
-        
-
+        buttons.ibutton("ʀᴇᴍɴᴀᴍᴇ", f"userset {user_id} remname")
+        remname = user_dict.get('remname', 'ɴᴏᴛ ᴇxɪsᴛs')
         mediainfo = "ᴇɴᴀʙʟᴇᴅ" if user_dict.get('mediainfo', config_dict['SHOW_MEDIAINFO']) else "ᴅɪsᴀʙʟᴇᴅ"
         buttons.ibutton('ᴅɪsᴀʙʟᴇᴅ ᴍᴇᴅɪᴀɪɴғᴏ' if mediainfo == 'Enabled' else 'ᴇɴᴀʙʟᴇᴅ ᴍᴇᴅɪᴀɪɴғᴏ', f"userset {user_id} mediainfo")
         if config_dict['SHOW_MEDIAINFO']:
-            mediainfo = "Force Enabled"
-
-        remname = user_dict.get('remname', 'ɴᴏᴛ ᴇxɪsᴛs')
-        buttons.ibutton("ʟᴇᴄᴄʜ sᴘʟɪᴛs", f"userset {user_id} split_size")
-
+            mediainfo = "Force Enabled"        
         SPLIT_SIZE = '4GB' if IS_PREMIUM_USER else '2GB'
-
         text = f'<b><u>ʟᴇᴇᴄʜ sᴇᴛᴛɪɴɢs ғᴏʀ : {name}</u></b>\n\n'
         text += f'<b>┌  ʟᴇᴇᴄʜ ᴛʏᴘᴇ :</b> <code>{ltype}</code>\n'
         text += f'<b>├  ᴄᴜsᴛᴏᴍ ᴛʜᴜᴍʙɴᴀɪʟ :</b> <code>{thumbmsg}</code>\n'
