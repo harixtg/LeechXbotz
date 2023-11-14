@@ -386,9 +386,9 @@ class MirrorLeechListener:
                 await deleteMessage(self.botpmmsg)
                 if self.isSuperGroup:
                     myrr = await self.message.reply_sticker("CAACAgIAAxkBAAEMzJJlUwOfWy7A7g0n2mTvk7QmXSAvHgACkgkAAvj0WUkTgkRl9J0cTB4E")
-                    await asyncio.sleep(2)
+                    await asyncio.sleep(1)
                     await myrr.delete()
-                    await sendMessage(self.message, f'~ {msg}<b>ғɪʟᴇꜱ ʜᴀꜱ ʙᴇᴇɴ ꜱᴇɴᴛ ᴛᴏ ʏᴏᴜʀ ɪɴʙᴏx</b>', iButton.build_menu(1), self.random_pic)
+                    await sendMessage(self.message, f'{msg}<b>ғɪʟᴇꜱ ʜᴀꜱ ʙᴇᴇɴ ꜱᴇɴᴛ ᴛᴏ ʏᴏᴜʀ ɪɴʙᴏx</b>', iButton.build_menu(1), self.random_pic)
                 else:
                     await deleteMessage(self.botpmmsg)
             if self.seed:
@@ -475,7 +475,8 @@ class MirrorLeechListener:
         msg += f'<b>ʀᴇᴀsᴏɴ : </b><code>{escape(error)}</code>\n'
         msg += f'<b>ᴇʟᴀᴘsᴇᴅ : </b><code>{get_readable_time(time() - self.message.date.timestamp())}</code>'
         buttons.ibutton("× ᴄʟᴏsᴇ ×", f"userset {user_id} close")
-        x = await sendMessage(self.message, msg, button = buttons.build_menu(1))
+        button = buttons.build_menu(1)
+        x = await sendMessage(self.message, msg, button)
         await delete_links(self.message)
         if self.botpmmsg:
         	  await deleteMessage(self.botpmmsg)
@@ -486,7 +487,7 @@ class MirrorLeechListener:
         else:
             await update_all_messages()
         if self.isSuperGroup and self.botpmmsg:
-            await sendMessage(self.botpmmsg, msg, button = buttons.build_menu(1))
+            await sendMessage(self.botpmmsg, msg, button)
         await five_minute_del(x)
         
         async with queue_dict_lock:
@@ -520,7 +521,8 @@ class MirrorLeechListener:
         msg += f'<b>ᴇʟᴀᴘsᴇᴅ : </b><code>{get_readable_time(time() - self.message.date.timestamp())}</code>'
         #buttons = ButtonMaker()
         buttons.ibutton("× ᴄʟᴏsᴇ ×", f"userset {user_id} close")
-        x = await sendMessage(self.message, msg, button = buttons.build_menu(1))
+        button = buttons.build_menu(1)
+        x = await sendMessage(self.message, msg, button)
         if self.linkslogmsg:
             await deleteMessage(self.linkslogmsg)
         await delete_links(self.message)
@@ -531,7 +533,7 @@ class MirrorLeechListener:
         else:
             await update_all_messages()
         if self.isSuperGroup and self.botpmmsg:
-            await sendMessage(self.botpmmsg, msg, button = buttons.build_menu(1))
+            await sendMessage(self.botpmmsg, msg, button)
         await five_minute_del(x)
         
         async with queue_dict_lock:
