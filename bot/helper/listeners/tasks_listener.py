@@ -384,7 +384,10 @@ class MirrorLeechListener:
                 await sendMessage(self.botpmmsg, msg + lmsg + fmsg)
                 await deleteMessage(self.botpmmsg)
                 if self.isSuperGroup:
-                    await sendMessage(self.message, f'{msg}<b>ғɪʟᴇꜱ ʜᴀꜱ ʙᴇᴇɴ ꜱᴇɴᴛ ᴛᴏ ʏᴏᴜʀ ɪɴʙᴏx</b>', iButton.build_menu(1), self.random_pic)
+                    myrr = await self.message.reply_sticker("CAACAgIAAxkBAAEMzJJlUwOfWy7A7g0n2mTvk7QmXSAvHgACkgkAAvj0WUkTgkRl9J0cTB4E")
+                    await asyncio.sleep(2)
+                    await myrr.delete()
+                    await sendMessage(self.message, f'~ {msg}<b>ғɪʟᴇꜱ ʜᴀꜱ ʙᴇᴇɴ ꜱᴇɴᴛ ᴛᴏ ʏᴏᴜʀ ɪɴʙᴏx</b>', iButton.build_menu(1), self.random_pic)
                 else:
                     await deleteMessage(self.botpmmsg)
             if self.seed:
@@ -464,11 +467,14 @@ class MirrorLeechListener:
             if self.sameDir and self.uid in self.sameDir['tasks']:
                 self.sameDir['tasks'].remove(self.uid)
                 self.sameDir['total'] -= 1
-        msg = f'Hey, {self.tag}!\n'
-        msg += 'Your download has been stopped!\n\n'
-        msg += f'<b>Reason:</b> {escape(error)}\n'
-        msg += f'<b>Elapsed:</b> {get_readable_time(time() - self.message.date.timestamp())}'
-        x = await sendMessage(self.message, msg, button)
+        user_id = self.message.from_user.id
+        msg = f'<b>ʜᴇʏ, {self.tag}!</b>\n\n'
+        msg += f'<b>ʏᴏᴜʀ ᴅᴏᴡɴʟᴏᴀᴅ ʜᴀꜱ ʙᴇᴇɴ ꜱᴛᴏᴘᴘᴇᴅ !</b>\n\n'
+        msg += f'<b>ʀᴇᴀsᴏɴ : </b><code>{escape(error)}</code>\n'
+        msg += f'<b>ᴇʟᴀᴘsᴇᴅ : </b><code>{get_readable_time(time() - self.message.date.timestamp())}</code>'
+        buttons = ButtonMaker()
+        buttons.ibutton("× ᴄʟᴏsᴇ ×", f"userset {user_id} close")
+        x = await sendMessage(self.message, msg, buttons)
         await delete_links(self.message)
         if self.botpmmsg:
         	  await deleteMessage(self.botpmmsg)
@@ -505,11 +511,14 @@ class MirrorLeechListener:
             if self.uid in download_dict.keys():
                 del download_dict[self.uid]
             count = len(download_dict)
-        msg = f'Hey, {self.tag}!\n'
-        msg += 'Your upload has been stopped!\n\n'
-        msg += f'<b>Reason:</b> {escape(error)}\n'
-        msg += f'<b>Elapsed:</b> {get_readable_time(time() - self.message.date.timestamp())}'
-        x = await sendMessage(self.message, msg)
+        user_id = self.message.from_user.id
+        msg = f'<b>ʜᴇʏ, {self.tag}!</b>\n'
+        msg += f'<b>ʏᴏᴜʀ ᴜᴘʟᴏᴀᴅ ʜᴀꜱ ʙᴇᴇɴ ꜱᴛᴏᴘᴘᴇᴅ !</b>\n\n'
+        msg += f'<b>ʀᴇᴀsᴏɴ : </b><code>{escape(error)}</code>\n'
+        msg += f'<b>ᴇʟᴀᴘsᴇᴅ : </b><code>{get_readable_time(time() - self.message.date.timestamp())}</code>'
+        buttons = ButtonMaker()
+        buttons.ibutton("× ᴄʟᴏsᴇ ×", f"userset {user_id} close")
+        x = await sendMessage(self.message, msg, buttons)
         if self.linkslogmsg:
             await deleteMessage(self.linkslogmsg)
         await delete_links(self.message)
