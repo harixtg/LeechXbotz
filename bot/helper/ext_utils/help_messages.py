@@ -27,45 +27,47 @@ YT_HELP_MESSAGE = """
 """
 
 MIRROR_HELP_MESSAGE = """
-<b>To use the commands, follow this format:</b>
+<b>ᴛᴏ ᴜꜱᴇ ᴛʜᴇ ᴄᴏᴍᴍᴀɴᴅꜱ, ғᴏʟʟᴏᴡ ᴛʜɪꜱ ғᴏʀᴍᴀᴛ:</b>
+
 <code>/{cmd} link options</code> or replying to link </b>
 <code>/{cmd} options</code>
 
-<b>OPTIONS:</b>
-<b>-n new name:</b> Rename the file or folder.
+<b>𝗢𝗣𝗧𝗜𝗢𝗡𝗦 :</b>
 
-<b>-t thumbnail url:</b> Custom thumbnail for each leexh.(raw or tg image url)
+<b>-n new name:</b> Rᴇɴᴀᴍᴇ ᴛʜᴇ ғɪʟᴇ ᴏʀ ғᴏʟᴅᴇʀ.
 
-<b>-ss value:</b> Generate ss for leech video, max 10 for each leach.
+<b>-t thumbnail url:</b> Cᴜꜱᴛᴏᴍ ᴛʜᴜᴍʙɴᴀɪʟ ғᴏʀ ᴇᴀᴄʜ ʟᴇᴇxʜ.(ʀᴀᴡ ᴏʀ ᴛɢ ɪᴍᴀɢᴇ ᴜʀʟ)
 
-<b>-z or -z password:</b> Zip the file or folder with or without password.
+<b>-ss value:</b> Gᴇɴᴇʀᴀᴛᴇ ꜱꜱ ғᴏʀ ʟᴇᴇᴄʜ ᴠɪᴅᴇᴏ, ᴍᴀx 𝟷𝟶 ғᴏʀ ᴇᴀᴄʜ ʟᴇᴀᴄʜ.
 
-<b>-e or -e password:</b> Extract the file or folder with or without password.
+<b>-z or -z password:</b> Zɪᴘ ᴛʜᴇ ғɪʟᴇ ᴏʀ ғᴏʟᴅᴇʀ ᴡɪᴛʜ ᴏʀ ᴡɪᴛʜᴏᴜᴛ ᴘᴀꜱꜱᴡᴏʀᴅ.
 
-<b>-up upload destination:</b> Upload the file or folder to a specific destination.
+<b>-e or -e password:</b> Exᴛʀᴀᴄᴛ ᴛʜᴇ ғɪʟᴇ ᴏʀ ғᴏʟᴅᴇʀ ᴡɪᴛʜ ᴏʀ ᴡɪᴛʜᴏᴜᴛ ᴘᴀꜱꜱᴡᴏʀᴅ.
 
-<b>-id drive_folder_link</b> or <b>-id drive_id -index https://anything.in/0:</b>: Upload to a custom Google Drive folder or ID.
+<b>-up upload destination:</b> Uᴘʟᴏᴀᴅ ᴛʜᴇ ғɪʟᴇ ᴏʀ ғᴏʟᴅᴇʀ ᴛᴏ ᴀ ꜱᴘᴇᴄɪғɪᴄ ᴅᴇꜱᴛɪɴᴀᴛɪᴏɴ.
 
-<b>-u username -p password:</b> Provide authorization for a direct link.
+<b>-id drive_folder_link</b> or <b> -ɪᴅ ᴅʀɪᴠᴇ_ɪᴅ -ɪɴᴅᴇx ʜᴛᴛᴘꜱ://ᴀɴʏᴛʜɪɴɢ.ɪɴ/𝟶:: Uᴘʟᴏᴀᴅ ᴛᴏ ᴀ ᴄᴜꜱᴛᴏᴍ Gᴏᴏɢʟᴇ Dʀɪᴠᴇ ғᴏʟᴅᴇʀ ᴏʀ ID.
 
-<b>-s:</b> Select a torrent file.
+<b>-u username -p password:</b> Pʀᴏᴠɪᴅᴇ ᴀᴜᴛʜᴏʀɪᴢᴀᴛɪᴏɴ ғᴏʀ ᴀ ᴅɪʀᴇᴄᴛ ʟɪɴᴋ.
+
+<b>-s:</b> Sᴇʟᴇᴄᴛ ᴀ ᴛᴏʀʀᴇɴᴛ ғɪʟᴇ.
 
 <b>-h Direct link custom headers:</b> -h
 <code>/cmd</code> link -h Key: value Key1: value1.
 
-<b>-d ratio:seed_time:</b> Set the seeding ratio and time for a torrent.
+<b>-d ratio:seed_time:</b> Sᴇᴛ ᴛʜᴇ ꜱᴇᴇᴅɪɴɢ ʀᴀᴛɪᴏ ᴀɴᴅ ᴛɪᴍᴇ ғᴏʀ ᴀ ᴛᴏʀʀᴇɴᴛ.
 
-<b>-i number of links/files:</b> Process multiple links or files.
+<b>-i number of links/files:</b> Pʀᴏᴄᴇꜱꜱ ᴍᴜʟᴛɪᴘʟᴇ ʟɪɴᴋꜱ ᴏʀ ғɪʟᴇꜱ.
 
-<b>-m folder name:</b> Process multiple links or files within the same upload directory.
+<b>-m folder name:</b> Pʀᴏᴄᴇꜱꜱ ᴍᴜʟᴛɪᴘʟᴇ ʟɪɴᴋꜱ ᴏʀ ғɪʟᴇꜱ ᴡɪᴛʜɪɴ ᴛʜᴇ ꜱᴀᴍᴇ ᴜᴘʟᴏᴀᴅ ᴅɪʀᴇᴄᴛᴏʀʏ.
 
-<b>-b:</b> Perform bulk download by replying to a text message or file with multiple links separated with new line.
+<b>-b:</b> Pᴇʀғᴏʀᴍ ʙᴜʟᴋ ᴅᴏᴡɴʟᴏᴀᴅ ʙʏ ʀᴇᴘʟʏɪɴɢ ᴛᴏ ᴀ ᴛᴇxᴛ ᴍᴇꜱꜱᴀɢᴇ ᴏʀ ғɪʟᴇ ᴡɪᴛʜ ᴍᴜʟᴛɪᴘʟᴇ ʟɪɴᴋꜱ ꜱᴇᴘᴀʀᴀᴛᴇᴅ ᴡɪᴛʜ ɴᴇᴡ ʟɪɴᴇ.
 
-<b>-j:</b> Join split files together before extracting or zipping.
+<b>-j:</b> Jᴏɪɴ ꜱᴘʟɪᴛ ғɪʟᴇꜱ ᴛᴏɢᴇᴛʜᴇʀ ʙᴇғᴏʀᴇ ᴇxᴛʀᴀᴄᴛɪɴɢ ᴏʀ ᴢɪᴘᴘɪɴɢ.
 
-<b>-rcf:</b> Set Rclone flags for the command.
+<b>-rcf:</b> Sᴇᴛ Rᴄʟᴏɴᴇ ғʟᴀɢꜱ ғᴏʀ ᴛʜᴇ ᴄᴏᴍᴍᴀɴᴅ.
 
-<b>main:dump/ubuntu.iso</b> or <b>rcl:</b> Treat a path as an rclone download."""
+<b>main:dump/ubuntu.iso</b> or <b>rcl:</b> Tʀᴇᴀᴛ ᴀ ᴘᴀᴛʜ ᴀꜱ ᴀɴ ʀᴄʟᴏɴᴇ ᴅᴏᴡɴʟᴏᴀᴅ."""
 
 RSS_HELP_MESSAGE = """
 Use this format to add feed URL:
