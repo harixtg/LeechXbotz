@@ -467,12 +467,12 @@ def extra_btns(buttons):
 async def set_commands(client):
     if config_dict['SET_COMMANDS']:
         commands = [
-            BotCommand(f'{BotCommands.MirrorCommand[0]}', '- Start mirroring'),
+            #BotCommand(f'{BotCommands.MirrorCommand[0]}', '- Start mirroring'),
             BotCommand(f'{BotCommands.LeechCommand[0]}', '- Start leeching'),
-            BotCommand(f'{BotCommands.YtdlCommand[0]}', '- Mirror yt-dlp supported link'),
+            #BotCommand(f'{BotCommands.YtdlCommand[0]}', '- Mirror yt-dlp supported link'),
             BotCommand(f'{BotCommands.YtdlLeechCommand[0]}', '- Leech through yt-dlp supported link'),
-            BotCommand(f'{BotCommands.CloneCommand[0]}', '- Copy file/folder to Drive'),
-            BotCommand(f'{BotCommands.CountCommand}', '- Count file/folder on Google Drive.'),
+            #BotCommand(f'{BotCommands.CloneCommand[0]}', '- Copy file/folder to Drive'),
+            #BotCommand(f'{BotCommands.CountCommand}', '- Count file/folder on Google Drive.'),
             BotCommand(f'{BotCommands.MediaInfoCommand}', '- Get MediaInfo'),
             BotCommand(f'{BotCommands.ListCommand}', '- Search in Drive'),
             BotCommand(f'{BotCommands.SearchCommand}', '- Search in Torrent'),
