@@ -206,7 +206,11 @@ async def _mirror_leech(client, message, isQbit=False, isLeech=False, sameDir=No
             file_ = None
 
     if not is_url(link) and not is_magnet(link) and not await aiopath.exists(link) and not is_rclone_path(link) and file_ is None:
-        reply_message = await sendMessage(message, MIRROR_HELP_MESSAGE)
+        user_id = from_user.id
+        buttons = ButtonMaker()
+        buttons.ibutton("⤬ 𝗖𝗟𝗢𝗦𝗘 ⤬", f"userset {user_id} close")
+        us = 'https://graph.org/file/4a23820398e62ec753cc0.jpg'
+        reply_message = await sendMessage(message, MIRROR_HELP_MESSAGE, button, us)
         await deleteMessage(message)
         await one_minute_del(reply_message)
         return
