@@ -210,6 +210,7 @@ async def _mirror_leech(client, message, isQbit=False, isLeech=False, sameDir=No
         user_id = message.from_user.id
         buttons = ButtonMaker()
         buttons.ibutton("× ᴄʟᴏsᴇ ×", f"userset {user_id} close")
+        button = buttons.build_menu(1)
         us = 'https://graph.org/file/4a23820398e62ec753cc0.jpg'
         reply_message = await sendMessage(message, MIRROR_HELP_MESSAGE, button, us)
         await deleteMessage(message)
