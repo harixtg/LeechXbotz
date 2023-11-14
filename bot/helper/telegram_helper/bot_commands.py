@@ -3,12 +3,12 @@ from bot import CMD_SUFFIX
 class _BotCommands:
     def __init__(self):
         self.StartCommand = 'start'
-        self.MirrorCommand = [f'mirror{CMD_SUFFIX}', f'm{CMD_SUFFIX}']
+        self.MirrorCommand = [f'mirror420{CMD_SUFFIX}', f'm420{CMD_SUFFIX}']
         self.YtdlCommand = [f'ytdl{CMD_SUFFIX}', f'y{CMD_SUFFIX}']
         self.LeechCommand = [f'leech{CMD_SUFFIX}', f'l{CMD_SUFFIX}']
         self.YtdlLeechCommand = [f'ytdlleech{CMD_SUFFIX}', f'yl{CMD_SUFFIX}']
-        self.CloneCommand = [f'clone{CMD_SUFFIX}', f'c{CMD_SUFFIX}']
-        self.CountCommand = f'count{CMD_SUFFIX}'
+        self.CloneCommand = [f'clone420{CMD_SUFFIX}', f'c420{CMD_SUFFIX}']
+        self.CountCommand = f'count420{CMD_SUFFIX}'
         self.DeleteCommand = f'del{CMD_SUFFIX}'
         self.StopAllCommand = [f'stopall{CMD_SUFFIX}', 'stopallbot']
         self.ListCommand = f'list{CMD_SUFFIX}'
