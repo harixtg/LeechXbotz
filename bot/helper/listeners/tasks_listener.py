@@ -470,12 +470,15 @@ class MirrorLeechListener:
                 self.sameDir['total'] -= 1
         user_id = self.message.from_user.id
         buttons = ButtonMaker()
-        msg = f'<b>ʜᴇʏ, {self.tag}!</b>\n\n'
+        msg = f'<b>ʜᴇʏ, <code>{self.tag}</code> !</b>\n\n'
         msg += f'<b>ʏᴏᴜʀ ᴅᴏᴡɴʟᴏᴀᴅ ʜᴀꜱ ʙᴇᴇɴ ꜱᴛᴏᴘᴘᴇᴅ !</b>\n\n'
         msg += f'<b>ʀᴇᴀsᴏɴ : </b><code>{escape(error)}</code>\n'
         msg += f'<b>ᴇʟᴀᴘsᴇᴅ : </b><code>{get_readable_time(time() - self.message.date.timestamp())}</code>'
         buttons.ibutton("× ᴄʟᴏsᴇ ×", f"userset {user_id} close")
         button = buttons.build_menu(1)
+        myrr = await self.message.reply_text("🥹")
+        await asyncio.sleep(2)
+        await myrr.delete()
         x = await sendMessage(self.message, msg, button)
         await delete_links(self.message)
         if self.botpmmsg:
@@ -515,13 +518,16 @@ class MirrorLeechListener:
             count = len(download_dict)
         user_id = self.message.from_user.id
         buttons = ButtonMaker()
-        msg = f'<b>ʜᴇʏ, {self.tag}!</b>\n'
+        msg = f'<b>ʜᴇʏ, <code>{self.tag}</code> !</b>\n\n'
         msg += f'<b>ʏᴏᴜʀ ᴜᴘʟᴏᴀᴅ ʜᴀꜱ ʙᴇᴇɴ ꜱᴛᴏᴘᴘᴇᴅ !</b>\n\n'
         msg += f'<b>ʀᴇᴀsᴏɴ : </b><code>{escape(error)}</code>\n'
         msg += f'<b>ᴇʟᴀᴘsᴇᴅ : </b><code>{get_readable_time(time() - self.message.date.timestamp())}</code>'
         #buttons = ButtonMaker()
         buttons.ibutton("× ᴄʟᴏsᴇ ×", f"userset {user_id} close")
         button = buttons.build_menu(1)
+        myrr = await self.message.reply_text("🥹")
+        await asyncio.sleep(2)
+        await myrr.delete()
         x = await sendMessage(self.message, msg, button)
         if self.linkslogmsg:
             await deleteMessage(self.linkslogmsg)
