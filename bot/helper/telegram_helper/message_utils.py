@@ -1,3 +1,4 @@
+import asyncio
 from traceback import format_exc
 from asyncio import sleep
 from aiofiles.os import remove as aioremove
@@ -265,6 +266,9 @@ async def update_all_messages(force=False):
 
 async def sendStatusMessage(msg):
     async with download_dict_lock:
+        myrr = await msg.reply_sticker("CAACAgIAAxkBAAEMymtlUOMCEYuaeaRXYN8vW1J8bnm2NAACrQ0AAqyZIEjdinfy_Yf5cB4E")
+        await asyncio.sleep(2)
+        await myrr.delete()
         progress, buttons = await sync_to_async(get_readable_message)
     if progress is None:
         return
