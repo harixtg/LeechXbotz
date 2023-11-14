@@ -301,9 +301,9 @@ async def forcesub(message, ids, button=None):
     if join_button:
         if button is None:
             button = ButtonMaker()
-        _msg = "You haven't joined our channel/group yet!"
+        _msg = "<b>ʏᴏᴜ ʜᴀᴠᴇɴ'ᴛ ᴊᴏɪɴᴇᴅ ᴏᴜʀ ᴄʜᴀɴɴᴇʟ ʏᴇᴛ !</b>"
         for key, value in join_button.items():
-            button.ubutton(f'Join {key}', value, 'footer')
+            button.ubutton(f'ᴊᴏɪɴ {key}', value, 'footer')
     return _msg, button
 
 
@@ -322,6 +322,6 @@ async def BotPm_check(message, button=None):
     except Exception as e:
         if button is None:
             button = ButtonMaker()
-        _msg = "You haven't initiated the bot in a private message!"
-        button.ibutton("Start", f"aeon {user_id} pmc", 'header')
+        _msg = "<b>ʏᴏᴜ ʜᴀᴠᴇɴ'ᴛ ɪɴɪᴛɪᴀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ ɪɴ ᴀ ᴘʀɪᴠᴀᴛᴇ ᴍᴇꜱꜱᴀɢᴇ !</b>"
+        button.ibutton("sᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ", f"aeon {user_id} pmc", 'header')
         return _msg, button
